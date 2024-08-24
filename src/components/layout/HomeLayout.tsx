@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight, UserRound } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState } from "react";
@@ -158,7 +158,7 @@ const HomeLayout = () => {
           </div>
         </header>
 
-        <main className="flex-1  p-4 px-4 lg:px-6 mt-12">
+        <main className="flex-1  mt-16">
           <Outlet />
         </main>
       </div>
