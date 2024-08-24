@@ -1,82 +1,15 @@
-import {
-  ChevronRight,
-  SearchCheck,
-  LucideHome,
-  BookMarkedIcon,
-  Tag,
-  Book,
-  ShoppingCart,
-  LucideIcon,
-  UserRound,
-} from "lucide-react";
-
+import { ChevronDown, ChevronRight, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
 import { useEffect, useState } from "react";
-
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 import { TextAlignCenterIcon } from "@radix-ui/react-icons";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import assets from "@/assets";
 import sideMenuItems, { App_Name } from "@/constants";
-import { Separator } from "@radix-ui/react-separator";
-
-interface SideMenuItem {
-  title: string;
-  path: string;
-  image: string; // URL to the image
-  show?: boolean; // Optional property to control visibility
-}
-
-interface HeaderMenuItem {
-  title: string;
-  path: string;
-  icon: LucideIcon;
-}
 
 const HomeLayout = () => {
-  const navigate = useNavigate();
-
-  const user = null;
-  const pathname = window.location.pathname;
-  const [q, setQ] = useState<string>("");
-
-  // Dynamically generate sideMenu using fetched categories
-  const sideMenu: SideMenuItem[] =
-    sideMenuItems?.map((category: any) => ({
-      title: category.categoryName,
-      path: `/blogs/category/${encodeURIComponent(category.categoryName)}`,
-      image: category.image,
-      show: true, // Set visibility based on your logic
-    })) || [];
-
-  const headerMenu: HeaderMenuItem[] = [
-    {
-      title: "Home",
-      path: `/`,
-      icon: LucideHome,
-    },
-    {
-      title: "Bookmark",
-      path: `/blogs/bookmarks`,
-      icon: BookMarkedIcon,
-    },
-    {
-      title: "Tags",
-      path: `/blogs/tags`,
-      icon: Tag,
-    },
-    {
-      title: "Blogs",
-      path: `/blogs`,
-      icon: Book,
-    },
-  ];
-
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -110,18 +43,20 @@ const HomeLayout = () => {
             </Button>
           </div>
           <div className="flex-1 overflow-y-auto max-h-full">
-            <nav className="grid items-start px-2 text-md font-medium lg:px-4">
-            
-              {sideMenu.map((item, index) =>
+            <nav className="grid gap-2 text-lg font-medium">
+              {sideMenuItems.map((item, index) =>
                 item.show ? (
-                  <Link
+                  <NavLink
                     key={index}
                     to={item.path}
-                    className={cn(
-                      "flex items-center justify-between gap-3 px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                      pathname === item.path &&
-                        "text-primary bg-muted border-r-4 border-r-primary"
-                    )}
+                    className={({ isActive }) =>
+                      cn(
+                        "flex items-center justify-between gap-3 px-3 py-2 transition-all",
+                        isActive
+                          ? "text-primary bg-muted "
+                          : "text-muted-foreground hover:text-primary"
+                      )
+                    }
                   >
                     <div className="flex items-center gap-3">
                       <img
@@ -134,37 +69,17 @@ const HomeLayout = () => {
                       {item.title}
                     </div>
                     <ChevronRight />
-                  </Link>
+                  </NavLink>
                 ) : null
               )}
             </nav>
-            <Separator />
-            <div className="mb-auto p-4">
-              {headerMenu.map((item, index) => (
-                <Link
-                  key={index}
-                  to={item.path}
-                  className={cn(
-                    "flex items-center gap-3 px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                    pathname === item.path &&
-                      "text-primary bg-muted border-r-4 border-r-primary"
-                  )}
-                >
-                  <item.icon className="h-5 w-5" />
-                  {item.title}
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="flex flex-col">
-        <motion.header
-          initial={{ y: -150 }}
-          animate={{ y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+        <header
           className={`flex justify-between h-14 items-center fixed top-0 left-0 md:left-[280px] right-0 z-50 gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 ${
             scrolled ? "bg-opacity-90 border-b backdrop-blur-xl" : ""
           }`}
@@ -185,18 +100,19 @@ const HomeLayout = () => {
               className="flex flex-col overflow-y-auto max-h-full"
             >
               <nav className="grid gap-2 text-lg font-medium">
-                
-                {/* <GlobalSearch placeholder="Search medicine......." /> */}
-                {sideMenu.map((item, index) =>
+                {sideMenuItems.map((item, index) =>
                   item.show ? (
-                    <Link
+                    <NavLink
                       key={index}
                       to={item.path}
-                      className={cn(
-                        "flex items-center justify-between gap-3 px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                        pathname === item.path &&
-                          "text-primary bg-muted border-r-4 border-r-primary"
-                      )}
+                      className={({ isActive }) =>
+                        cn(
+                          "flex items-center justify-between gap-3 px-3 py-2 transition-all",
+                          isActive
+                            ? "text-primary bg-muted"
+                            : "text-muted-foreground hover:text-primary"
+                        )
+                      }
                     >
                       <div className="flex items-center gap-3">
                         <img
@@ -209,35 +125,25 @@ const HomeLayout = () => {
                         {item.title}
                       </div>
                       <ChevronRight />
-                    </Link>
+                    </NavLink>
                   ) : null
                 )}
               </nav>
-              <div className="mt-auto">
-                {headerMenu.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.path}
-                    className={cn(
-                      "flex items-center gap-3 px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                      pathname === item.path &&
-                        "text-primary bg-muted border-r-4 border-r-primary"
-                    )}
-                  >
-                    <item.icon className="h-5 w-5" />
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
             </SheetContent>
           </Sheet>
           <p>Welcome To EasyShop Store</p>
 
-
-          <div>
-            <UserRound />
+          <div className="flex items-center gap-3">
+            <img
+              src={assets.images.profile}
+              alt={App_Name}
+              width={40}
+              height={40}
+              className="rounded"
+            />
+            <ChevronDown />
           </div>
-        </motion.header>
+        </header>
 
         <main className="flex-1  p-4 px-4 lg:px-6 mt-12">
           <Outlet />
