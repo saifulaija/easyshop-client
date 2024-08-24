@@ -3,49 +3,53 @@ import assets from "@/assets";
 
 import SubHeroCard from "./SubHeroCard";
 import { useGetMetaDataQuery } from "@/redux/features/meta/metaApi";
+import Loader from "@/components/shared/Loader/Loader";
 
 // TData type definition
 export type TData = {
   title: string;
   icon: string;
-  color: string;
+  quantity: number;
 };
 
-const SubHero= () => {
-const{data:meta,isLoading}=useGetMetaDataQuery({})
-console.log(meta);
-
-
+const SubHero = () => {
+  const { data: meta, isLoading } = useGetMetaDataQuery({});
 
   // const icon: assets.subHero.upload;
   const data: TData[] = [
     {
-      title: "Discover Available Flats",
+      title: "Products",
       icon: assets.images.product,
-      color: "purple-500",
+      quantity: meta?.data?.totalProducts,
     },
     {
-      title: "Subscribe for New Listings",
-      icon: assets.images.product,
-      color: "#ff8c00",
+      title: "Orders",
+      icon: assets.images.order,
+      quantity: meta?.data?.totalOrders,
     },
     {
-      title: "Engage with the Community",
-      icon: assets.images.product,
-      color: "#00bfff",
+      title: "Sales",
+      icon: assets.images.taka,
+      quantity:`${meta?.data?.totalSeals}Tk`,
     },
     {
-      title: "User-Friendly Booking",
-      icon: assets.images.product,
-      color: "#32cd32",
+      title: "Customers",
+      icon: assets.images.user,
+      quantity: meta?.data?.totalCustomers,
     },
   ];
 
   return (
     <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4 -mt-2">
-      {data.map((item, index) => (
-        <SubHeroCard key={index} item={item} />
-      ))}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          {data.map((item, index) => (
+            <SubHeroCard key={index} item={item} />
+          ))}
+        </>
+      )}
     </div>
   );
 };
