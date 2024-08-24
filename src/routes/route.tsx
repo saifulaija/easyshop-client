@@ -1,68 +1,51 @@
 import Home from "@/components/home/Home";
 import HomeLayout from "@/components/layout/HomeLayout";
 import NotFound from "@/components/shared/NotFound/NotFound";
-import Login from "@/pages/login/Login";
-import Register from "@/pages/register/Register";
+import CohortLifetimeValue from "@/pages/cohortLifetimeValue/CohortLifetimeValue";
+import CustomerGeography from "@/pages/customerGeography/CustomerGeography";
+import CustomerGrowth from "@/pages/customerGrowth/CustomerGrowth";
+import RepeatCustomers from "@/pages/repeatCustomers/RepeatCustomers";
+import SalesGrowth from "@/pages/salesGrowth/SalesGrowth";
+import SalesOverView from "@/pages/salesOverView/SalesOverView";
 import { createBrowserRouter } from "react-router-dom";
 
-const router= createBrowserRouter([
-    {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomeLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
         path: "/",
-        element: <HomeLayout />,
-        errorElement: <NotFound />,
-        children: [
-          {
-            path: "/",
-            element: <Home />,
-          },
-        //   {
-        //     path: "product/:id",
-        //     element: <ProductDetails />,
-     
-        //   },
-    
-          {
-            path: "login",
-            element: <Login />,
-          },
-        //   {
-        //     path:'forget-password',
-        //     element:<ForgotPasswordPage/>
-        //   },
-        //   {
-        //     path:'reset-password',
-        //     element:<ResetPassword/>
-        //   },
-          {
-            path: "register",
-            element: <Register />,
-          },
-        //   {
-        //     path: "complain",
-        //     element: <ExchangeAndComplain />,
-        //   },
-        //   {
-        //     path: "checkout",
-        //     element: <CheckoutPage />,
-        //   },
-        //   {
-        //     path: "success",
-        //     element: <Success />,
-        //   },
-        //   {
-        //     path: "checkout",
-        //     element: <CheckoutPage />,
-        //   },
-        //   {
-        //     path: "error",
-        //     element: <Error />,
-        //   },
-        //   {
-        //     path: "order/:id",
-        //     element: <OrderSuccess />,
-        //   },
-        ],
+        element: <Home />,
       },
-])
+      {
+        path: "sales_over_time",
+        element: <SalesOverView />,
+      },
 
-export default router
+      {
+        path: "sales_growth_rate",
+        element: <SalesGrowth />,
+      },
+      {
+        path: "repeat_customers",
+        element: <RepeatCustomers />,
+      },
+      {
+        path: "customers_growth",
+        element: <CustomerGrowth />,
+      },
+      {
+        path: "customer_geography",
+        element: <CustomerGeography />,
+      },
+      {
+        path: "cohort_lifetime_value",
+        element: <CohortLifetimeValue />,
+      },
+    ],
+  },
+]);
+
+export default router;
