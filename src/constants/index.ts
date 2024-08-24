@@ -43,6 +43,12 @@ const sideMenuItems: SideMenuItem[] = [
     image: "/images/profile-icon.png",
     show: false, // This item will be hidden
   },
+  {
+    title: "Cohort Lifetime Value",
+    path: "/cohort_lifetime_value",
+    image: "/images/profile-icon.png",
+    show: false, // This item will be hidden
+  },
 ];
 
 export default sideMenuItems;
