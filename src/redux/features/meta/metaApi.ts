@@ -3,7 +3,7 @@
 import { baseApi } from "../../api/baseApi";
 // import { TUser } from "../auth/authSlice";
 
-const userApi = baseApi.injectEndpoints({
+const metaApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createUser: builder.mutation({
       query: (userInfo) => {
@@ -17,10 +17,10 @@ const userApi = baseApi.injectEndpoints({
       invalidatesTags: ["user"],
     }),
 
-    getAllUser: builder.query({
+    getMetaData: builder.query({
       query: () => {
         return {
-          url: "/users",
+          url: "/meta",
           method: "GET",
         };
       },
@@ -46,7 +46,7 @@ const userApi = baseApi.injectEndpoints({
 
 export const {
   useCreateUserMutation,
- useGetAllUserQuery,
+ useGetMetaDataQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,
-} = userApi;
+} = metaApi;

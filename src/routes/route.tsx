@@ -1,4 +1,5 @@
-import Home from "@/components/home/Home";
+
+import Home from "@/components/dadhboard/home/Home";
 import HomeLayout from "@/components/layout/HomeLayout";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import CohortLifetimeValue from "@/pages/cohortLifetimeValue/CohortLifetimeValue";
