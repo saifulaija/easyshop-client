@@ -36,7 +36,7 @@ const HomeLayout = () => {
                 alt={`${App_Name} logo`}
                 className="rounded-md mr-1"
               />
-              {App_Name}
+              <span className="text-[#898080]">{App_Name}</span>
             </Link>
             <Button variant="link" size="icon" className="ml-auto h-8 w-8">
               <span className="sr-only">Toggle notifications</span>
@@ -99,7 +99,10 @@ const HomeLayout = () => {
               side="left"
               className="flex flex-col overflow-y-auto max-h-full"
             >
-              <Link to="/" className="flex items-center gap-2 font-semibold -mt-4">
+              <Link
+                to="/"
+                className="flex items-center gap-2 font-semibold -mt-4"
+              >
                 <img
                   src={assets.images.logo}
                   width={40}
@@ -107,7 +110,7 @@ const HomeLayout = () => {
                   alt={`${App_Name} logo`}
                   className="rounded-md mr-1"
                 />
-                {App_Name}
+                <span className="text-[#898080]">{App_Name}</span>
               </Link>
               <nav className="grid gap-2 text-lg font-medium">
                 {sideMenuItems.map((item, index) =>
@@ -143,7 +146,7 @@ const HomeLayout = () => {
           </Sheet>
           <p>Welcome To EasyShop Store</p>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             <img
               src={assets.images.profile}
               alt={App_Name}
@@ -151,7 +154,7 @@ const HomeLayout = () => {
               height={40}
               className="rounded"
             />
-            <ChevronDown />
+            <ChevronDown size={32} color="#898080" />
           </div>
         </header>
 
