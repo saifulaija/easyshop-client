@@ -17,7 +17,7 @@ const sideMenuItems: SideMenuItem[] = [
     show: true,
   },
   {
-    title: "Sales Over Time:",
+    title: "Sales Over Time",
     path: "/sales_over_time",
     image: assets.images.saleRate,
     show: true,

@@ -26,9 +26,9 @@ const HomeLayout = () => {
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       {/* Sidebar */}
       <div className="hidden border-r bg-muted/40 md:block">
-        <div className="flex h-full max-h-screen flex-col gap-2 fixed">
+        <div className="flex h-full max-h-screen flex-col gap-2 w-[280px] fixed">
           <div className="flex h-14 items-center border-b py-4 px-4 lg:h-[60px] lg:px-6">
-            <Link to="/" className="flex items-center gap-2 font-semibold">
+            <Link to="/" className="flex items-center gap-1 font-semibold">
               <img
                 src={assets.images.logo}
                 width={40}
@@ -43,7 +43,7 @@ const HomeLayout = () => {
             </Button>
           </div>
           <div className="flex-1 overflow-y-auto max-h-full">
-            <nav className="grid gap-2 text-lg font-medium">
+            <nav className="grid gap-0 text-lg font-medium">
               {sideMenuItems.map((item, index) =>
                 item.show ? (
                   <NavLink
@@ -99,6 +99,16 @@ const HomeLayout = () => {
               side="left"
               className="flex flex-col overflow-y-auto max-h-full"
             >
+              <Link to="/" className="flex items-center gap-2 font-semibold -mt-4">
+                <img
+                  src={assets.images.logo}
+                  width={40}
+                  height={40}
+                  alt={`${App_Name} logo`}
+                  className="rounded-md mr-1"
+                />
+                {App_Name}
+              </Link>
               <nav className="grid gap-2 text-lg font-medium">
                 {sideMenuItems.map((item, index) =>
                   item.show ? (
