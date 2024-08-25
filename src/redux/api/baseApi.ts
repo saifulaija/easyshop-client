@@ -65,6 +65,6 @@ import { logout, setUser } from "../features/auth/authSlice";
     reducerPath: "baseApi",
     baseQuery: baseQueryWithRefreshToken,
   
-    tagTypes: ["product", "user", "review", "order"],
+    tagTypes: ["product", "user", "review", "order","customer"],
     endpoints: () => ({}),
   });
