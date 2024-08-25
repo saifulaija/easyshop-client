@@ -10,14 +10,7 @@ const orderApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["order"],
     }),
-    createPaymentSSL: builder.mutation({
-      query: (paymentInfo) => ({
-        url: "/order/payment-ssl",
-        method: "POST",
-        body: paymentInfo,
-      }),
-      invalidatesTags: ["order"],
-    }),
+
     updateOrderDelivery: builder.mutation({
       query: (orderData) => {
         console.log("order", orderData);
@@ -30,14 +23,17 @@ const orderApi = baseApi.injectEndpoints({
       invalidatesTags: ["order"],
     }),
 
-    getAllOrders: builder.query({
-      query: () => ({
-        url: "/orders",
-        method: "GET",
-      }),
-
+    getAllOrderOverTime: builder.query({
+      query: (args) => {
+        return {
+          url: "/order/sales-measurement",
+          method: "GET",
+          params: args,
+        };
+      },
       providesTags: ["order"],
     }),
+
     getAllSuccessfulOrders: builder.query({
       query: () => ({
         url: "/orders/successful-orders",
@@ -100,13 +96,13 @@ const orderApi = baseApi.injectEndpoints({
 
 export const {
   useCreateOrderMutation,
-  useGetAllOrdersQuery,
+  useLazyGetAllOrderOverTimeQuery,
   useDeleteOrderMutation,
   useGetSingleOrderQuery,
-  useCreatePaymentSSLMutation,
+
   useUpdateOrderDeliveryMutation,
   useGetSingleOrderByOrderNumberQuery,
   useGetAllSuccessfulOrdersQuery,
   useGetMyOrdersQuery,
-  useUpdateOrderCancelMutation
+  useUpdateOrderCancelMutation,
 } = orderApi;
