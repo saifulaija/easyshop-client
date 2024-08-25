@@ -12,8 +12,9 @@ import {
   ChartOptions,
   ChartData,
 } from "chart.js";
-import { Loader } from "lucide-react";
+
 import { useGetRepeatingCustomersQuery } from "@/redux/features/dashboard/dashboardApi";
+import Loader from "@/components/shared/Loader/Loader";
 
 // Register Chart.js components
 ChartJS.register(
@@ -31,7 +32,7 @@ interface CustomerGrowthData {
   repeatCustomers: number;
 }
 
-const RepeatCustomers: React.FC = () => {
+const RepeatCustomers = () => {
   const [view, setView] = useState<"daily" | "monthly" | "yearly">("daily");
   const {
     data: chartData,

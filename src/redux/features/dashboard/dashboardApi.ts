@@ -41,6 +41,13 @@ export const dashboardApi = baseApi.injectEndpoints({
       }),
       providesTags: ["customer"],
     }),
+    getCohortLifetimeValue: build.query({
+      query: () => ({
+        url: "/customer/geographical-distribution",
+        method: "GET",
+      }),
+      providesTags: ["customer"],
+    }),
   }),
 });
 
@@ -49,5 +56,6 @@ export const {
   useGetSellsGrowthRateQuery,
   useGetCustomerGrowthOverTimeQuery,
   useGetRepeatingCustomersQuery,
-  useGetGeographicalCustomersQuery
+  useGetGeographicalCustomersQuery,
+  useGetCohortLifetimeValueQuery
 } = dashboardApi;

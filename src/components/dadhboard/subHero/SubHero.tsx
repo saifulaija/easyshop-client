@@ -30,7 +30,7 @@ const SubHero = () => {
     {
       title: "Sales",
       icon: assets.images.taka,
-      quantity:`${meta?.data?.totalSeals}Tk`,
+      quantity: `${meta?.data?.totalSeals}Tk`,
     },
     {
       title: "Customers",
@@ -39,17 +39,14 @@ const SubHero = () => {
     },
   ];
 
+  if (isLoading) return <Loader />;
   return (
     <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4 -mt-2">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          {data.map((item, index) => (
-            <SubHeroCard key={index} item={item} />
-          ))}
-        </>
-      )}
+      <>
+        {data.map((item, index) => (
+          <SubHeroCard key={index} item={item} />
+        ))}
+      </>
     </div>
   );
 };

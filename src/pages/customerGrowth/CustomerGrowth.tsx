@@ -13,8 +13,9 @@ import {
   ChartData,
 } from "chart.js";
 
-import { Loader } from "lucide-react";
+
 import { useGetCustomerGrowthOverTimeQuery } from "@/redux/features/dashboard/dashboardApi";
+import Loader from "@/components/shared/Loader/Loader";
 
 // Register Chart.js components
 ChartJS.register(
@@ -32,7 +33,7 @@ interface CustomerGrowthData {
   newCustomers: number;
 }
 
-const CustomerGrowth: React.FC = () => {
+const CustomerGrowth= () => {
   const [view, setView] = useState<"daily" | "monthly" | "yearly">("daily");
   const {
     data: chartData,
@@ -76,7 +77,7 @@ const CustomerGrowth: React.FC = () => {
     labels,
     datasets: [
       {
-        label: "New Customers",
+        label: `New Customers by ${view}`,
         data: dataValues,
         borderColor: "rgba(255, 99, 132, 1)",
         backgroundColor: "rgba(255, 99, 132, 0.2)",

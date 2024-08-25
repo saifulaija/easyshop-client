@@ -38,7 +38,7 @@ const SalesGrowth: React.FC = () => {
   } = useGetSellsGrowthRateQuery({ interval: view });
 
 
-  console.log(chartData);
+
   
 
   if (isLoading) return <Loader />;

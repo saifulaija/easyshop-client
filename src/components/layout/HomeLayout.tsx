@@ -81,7 +81,7 @@ const HomeLayout = () => {
       <div className="flex flex-col">
         <header
           className={`flex justify-between h-14 items-center fixed top-0 left-0 md:left-[280px] right-0 z-50 gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 ${
-            scrolled ? "bg-opacity-90 border-b backdrop-blur-xl" : ""
+            scrolled ? "bg-opacity-90 border-b" : ""
           }`}
         >
           <Sheet>
