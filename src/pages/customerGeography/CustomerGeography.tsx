@@ -1,4 +1,3 @@
-
 // import { Pie } from "react-chartjs-2";
 // import {
 //   Chart as ChartJS,
@@ -97,10 +96,6 @@
 
 // export default CustomerGeography;
 
-
-
-
-
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -127,15 +122,9 @@ const CustomerMap = () => {
     isLoading,
   } = useGetGeographicalCustomersQuery({});
 
-
-
-  console.log(geoData);
-  
-
-  if (isLoading) return <Loader/>;
+  if (isLoading) return <Loader />;
   if (error) return <p>Error loading data!</p>;
 
-  // Map cities to approximate lat/lon coordinates (for demo purposes, these are rough estimates)
   const cityCoordinates: { [key: string]: [number, number] } = {
     Dinajpur: [25.6298, 88.6334],
     Khulna: [22.8456, 89.5403],
@@ -151,8 +140,11 @@ const CustomerMap = () => {
   };
 
   return (
-    <div className="h-[500px] w-[80%] mx-auto p-10">
-      <MapContainer center={[23.685, 90.3563]} zoom={7} className="h-full">
+    <div className="h-[500px] w-[80%] mx-auto p-8">
+      <h1 className="text-2xl font-semibold  md:mb-0 text-gray-600 text-center ">
+         Customer Geography
+      </h1>
+      <MapContainer center={[23.685, 90.3563]} zoom={7} className="h-full mt-4 rounded-sm">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -174,4 +166,3 @@ const CustomerMap = () => {
 };
 
 export default CustomerMap;
-
