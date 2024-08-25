@@ -12,6 +12,14 @@ import {
   ChartOptions,
   ChartData,
 } from "chart.js";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import Loader from "@/components/shared/Loader/Loader";
 import { useGetSellsGrowthRateQuery } from "@/redux/features/dashboard/dashboardApi";
@@ -36,10 +44,6 @@ const SalesGrowth: React.FC = () => {
     error,
     isLoading,
   } = useGetSellsGrowthRateQuery({ interval: view });
-
-
-
-  
 
   if (isLoading) return <Loader />;
   if (error) return <p>Error loading data!</p>;
@@ -72,19 +76,15 @@ const SalesGrowth: React.FC = () => {
   };
 
   const labels = getLabels();
-  const growthRates = [
-    chartData.data.previousPeriod.growthRate,
-    chartData.data.currentPeriod.growthRate,
-  ];
 
   const data: ChartData<"line"> = {
     labels,
     datasets: [
       {
-        label: "Growth Rate",
+        label: `Growth Rate by ${view}`,
         data: [chartData.data.growthRate],
-        borderColor: "rgba(75, 192, 192, 1)",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(220, 20, 60, 1)",
         pointStyle: "rectRounded",
         pointRadius: 10,
         pointHoverRadius: 15,
@@ -116,33 +116,45 @@ const SalesGrowth: React.FC = () => {
         display: true,
         position: "top",
       },
-      title: {
-        display: true,
-        text: "Sales Growth Rate",
-      },
+      // title: {
+      //   display: true,
+      //   text: "Sales Growth Rate",
+      // },
     },
   };
 
   return (
-    <div className="w-[80%] mx-auto">
-      <h1 className="text-center text-2xl font-semibold mb-4">
-        Sales Growth Chart
-      </h1>
-      <select
-        className="mb-4 p-2 border border-gray-300 rounded"
-        value={view}
-        onChange={(e) =>
-          setView(
-            e.target.value as "daily" | "monthly" | "quarterly" | "yearly"
-          )
-        }
-      >
-        <option value="daily">Daily</option>
-        <option value="monthly">Monthly</option>
-        <option value="quarterly">Quarterly</option>
-        <option value="yearly">Yearly</option>
-      </select>
-      <Line data={data} options={options} />
+    <div className="w-[80%] mx-auto p-4">
+      <div className="flex flex-col  md:flex-row md:justify-between md:items-center mb-2">
+        <h1 className="text-2xl font-semibold mb-4 md:mb-0 text-gray-600">
+          Sales Growth Rate
+        </h1>
+
+        <div className="w-full md:w-auto">
+          <Select
+            onValueChange={(value) => setView(value as typeof view)}
+            value={view}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Interval" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="daily">Daily</SelectItem>
+                <SelectItem value="monthly">Monthly</SelectItem>
+                <SelectItem value="quarterly">Quarterly</SelectItem>
+                <SelectItem value="yearly">Yearly</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {error ? (
+        <div className="text-red-500">{error}</div>
+      ) : (
+        <Line data={data} options={options} />
+      )}
     </div>
   );
 };
