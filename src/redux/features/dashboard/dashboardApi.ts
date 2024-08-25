@@ -14,14 +14,15 @@ export const dashboardApi = baseApi.injectEndpoints({
       query: (arg) => ({
         url: "/order/sales-growth-rate",
         method: "GET",
-        params:arg
+        params: arg,
       }),
       providesTags: ["order"],
     }),
     getCustomerGrowthOverTime: build.query({
-      query: (view) => ({
-        url: `/customers?interval=${view}`,
+      query: (arg) => ({
+        url: "/customer/new-customers-over-time",
         method: "GET",
+        params:arg
       }),
       providesTags: ["order"],
     }),
