@@ -1,101 +1,3 @@
-// import { Pie } from "react-chartjs-2";
-// import {
-//   Chart as ChartJS,
-//   ArcElement,
-//   Tooltip,
-//   Legend,
-//   ChartData,
-//   ChartOptions,
-// } from "chart.js";
-
-// import { Loader } from "lucide-react";
-// import { useGetGeographicalCustomersQuery } from "@/redux/features/dashboard/dashboardApi";
-
-// // Register Chart.js components
-// ChartJS.register(ArcElement, Tooltip, Legend);
-
-// interface GeoData {
-//   _id: string;
-//   customerCount: number;
-// }
-
-// const CustomerGeography = () => {
-//   const {
-//     data: geoData,
-//     error,
-//     isLoading,
-//   } = useGetGeographicalCustomersQuery({});
-
-//   if (isLoading) return <Loader />;
-//   if (error) return <p>Error loading data!</p>;
-
-//   const labels: string[] = geoData.data.map((item: GeoData) => item._id);
-//   const dataValues: number[] = geoData.data.map(
-//     (item: GeoData) => item.customerCount
-//   );
-
-//   const data: ChartData<"pie"> = {
-//     labels,
-//     datasets: [
-//       {
-//         label: "Customer Distribution",
-//         data: dataValues,
-//         backgroundColor: [
-//           "#FF6384",
-//           "#36A2EB",
-//           "#FFCE56",
-//           "#4BC0C0",
-//           "#9966FF",
-//           "#FF9F40",
-//           "#FF6384",
-//           "#36A2EB",
-//           "#FFCE56",
-//           "#4BC0C0",
-//           "#9966FF",
-//         ],
-//         borderColor: [
-//           "#FF6384",
-//           "#36A2EB",
-//           "#FFCE56",
-//           "#4BC0C0",
-//           "#9966FF",
-//           "#FF9F40",
-//           "#FF6384",
-//           "#36A2EB",
-//           "#FFCE56",
-//           "#4BC0C0",
-//           "#9966FF",
-//         ],
-//         borderWidth: 1,
-//       },
-//     ],
-//   };
-
-//   const options: ChartOptions<"pie"> = {
-//     responsive: true,
-//     plugins: {
-//       tooltip: {
-//         callbacks: {
-//           label: (context) => {
-//             const label = context.label || "";
-//             const value = context.raw || 0;
-//             return `${label}: ${value} customers`;
-//           },
-//         },
-//       },
-//     },
-//   };
-
-//   return (
-//     <div className="w-[50%] mx-auto">
-//       <h1>Geographical Distribution of Customers</h1>
-//       <Pie data={data} options={options} />
-//     </div>
-//   );
-// };
-
-// export default CustomerGeography;
-
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -122,6 +24,10 @@ const CustomerMap = () => {
     isLoading,
   } = useGetGeographicalCustomersQuery({});
 
+
+  console.log(geoData);
+  
+
   if (isLoading) return <Loader />;
   if (error) return <p>Error loading data!</p>;
 
@@ -140,11 +46,15 @@ const CustomerMap = () => {
   };
 
   return (
-    <div className="h-[500px] w-[80%] mx-auto p-8">
+    <div className="h-[500px] w-[80%] mx-auto p-8 space-x-5">
       <h1 className="text-2xl font-semibold  md:mb-0 text-gray-600 text-center ">
-         Customer Geography
+        Customer Geography
       </h1>
-      <MapContainer center={[23.685, 90.3563]} zoom={7} className="h-full mt-4 rounded-sm">
+      <MapContainer
+        center={[23.685, 90.3563]}
+        zoom={7}
+        className="h-full mt-4 rounded-sm"
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

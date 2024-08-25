@@ -1,4 +1,3 @@
-import React from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -12,8 +11,8 @@ import {
   ChartOptions,
 } from "chart.js";
 
-import { Loader } from "lucide-react";
 import { useGetCohortLifetimeValueQuery } from "@/redux/features/dashboard/dashboardApi";
+import Loader from "@/components/shared/Loader/Loader";
 
 // Register Chart.js components
 ChartJS.register(
@@ -38,8 +37,17 @@ const CohortLifetimeValue = () => {
     isLoading,
   } = useGetCohortLifetimeValueQuery({});
 
-  if (isLoading) return <Loader />;
-  if (error) return <p>Error loading data!</p>;
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-600">
+        Error loading data. Please try again later.
+      </div>
+    );
+  }
 
   const labels: string[] = clvData.data.map((item: CLVData) => item.cohort);
   const customerCounts: number[] = clvData.data.map(
@@ -55,16 +63,16 @@ const CohortLifetimeValue = () => {
       {
         label: "Customer Count",
         data: customerCounts,
-        backgroundColor: "#36A2EB",
-        borderColor: "#36A2EB",
+        backgroundColor: "rgba(54, 162, 235, 0.7)", // Semi-transparent blue
+        borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 1,
         yAxisID: "y1",
       },
       {
         label: "Total Lifetime Value",
         data: totalLifetimeValues,
-        backgroundColor: "#FF6384",
-        borderColor: "#FF6384",
+        backgroundColor: "rgba(255, 99, 132, 0.7)", // Semi-transparent red
+        borderColor: "rgba(255, 99, 132, 1)",
         borderWidth: 1,
         yAxisID: "y2",
       },
@@ -73,24 +81,34 @@ const CohortLifetimeValue = () => {
 
   const options: ChartOptions<"bar"> = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y1: {
         type: "linear",
         position: "left",
+        beginAtZero: true,
         title: {
           display: true,
           text: "Customer Count",
+          font: {
+            size: 14,
+          },
         },
       },
       y2: {
         type: "linear",
         position: "right",
+        beginAtZero: true,
         title: {
           display: true,
           text: "Total Lifetime Value ($)",
+          font: {
+            size: 14,
+          },
         },
+
         grid: {
-          drawOnChartArea: false, // Avoid drawing the grid lines for y2 over y1
+          drawOnChartArea: false,
         },
       },
     },
@@ -101,6 +119,10 @@ const CohortLifetimeValue = () => {
         font: {
           size: 18,
         },
+        padding: {
+          top: 20,
+          bottom: 30,
+        },
       },
       tooltip: {
         callbacks: {
@@ -108,22 +130,30 @@ const CohortLifetimeValue = () => {
             const label = context.dataset.label || "";
             const value = context.raw || 0;
             if (label === "Total Lifetime Value") {
-              return `${label}: $${value}`;
+              return `${label}: $${value.toLocaleString()}`;
             }
-            return `${label}: ${value}`;
+            return `${label}: ${value.toLocaleString()}`;
           },
         },
       },
       legend: {
         position: "top",
+        labels: {
+          padding: 20,
+        },
       },
+    },
+    interaction: {
+      mode: "index",
+      intersect: false,
     },
   };
 
   return (
     <div className="w-[80%] mx-auto">
-      <h1>Customer Lifetime Value by Cohorts</h1>
-      <Bar data={data} options={options} />
+      <div className="relative h-[400px]">
+        <Bar data={data} options={options} />
+      </div>
     </div>
   );
 };

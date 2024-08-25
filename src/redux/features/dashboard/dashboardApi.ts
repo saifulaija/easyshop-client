@@ -43,7 +43,7 @@ export const dashboardApi = baseApi.injectEndpoints({
     }),
     getCohortLifetimeValue: build.query({
       query: () => ({
-        url: "/customer/geographical-distribution",
+        url: "/customer/lifetime-value-cohorts",
         method: "GET",
       }),
       providesTags: ["customer"],
