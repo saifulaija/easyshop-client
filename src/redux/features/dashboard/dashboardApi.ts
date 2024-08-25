@@ -22,14 +22,15 @@ export const dashboardApi = baseApi.injectEndpoints({
       query: (arg) => ({
         url: "/customer/new-customers-over-time",
         method: "GET",
-        params:arg
+        params: arg,
       }),
       providesTags: ["order"],
     }),
     getRepeatingCustomers: build.query({
-      query: (view) => ({
-        url: `/customers/repeat?interval=${view}`,
+      query: (arg) => ({
+        url: "/customer/repeat-customers-over-time",
         method: "GET",
+        params: arg,
       }),
       providesTags: ["order"],
     }),
