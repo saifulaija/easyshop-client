@@ -13,6 +13,15 @@ import {
   ChartData,
 } from "chart.js";
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 
 import { useGetCustomerGrowthOverTimeQuery } from "@/redux/features/dashboard/dashboardApi";
 import Loader from "@/components/shared/Loader/Loader";
@@ -109,20 +118,52 @@ const CustomerGrowth= () => {
   };
 
   return (
-    <div className="w-[80%] mx-auto">
-      <h1>Customer Growth Over Time</h1>
-      <label htmlFor="interval-select">Select Interval: </label>
-      <select
-        id="interval-select"
-        value={view}
-        onChange={handleIntervalChange}
-        className="mb-4 border border-gray-300 rounded p-2"
-      >
-        <option value="daily">Daily</option>
-        <option value="monthly">Monthly</option>
-        <option value="yearly">Yearly</option>
-      </select>
-      <Line data={data} options={options} />
+    // <div className="w-[80%] mx-auto">
+    //   <h1>Customer Growth Over Time</h1>
+    //   <label htmlFor="interval-select">Select Interval: </label>
+    //   <select
+    //     id="interval-select"
+    //     value={view}
+    //     onChange={handleIntervalChange}
+    //     className="mb-4 border border-gray-300 rounded p-2"
+    //   >
+    //     <option value="daily">Daily</option>
+    //     <option value="monthly">Monthly</option>
+    //     <option value="yearly">Yearly</option>
+    //   </select>
+    //   <Line data={data} options={options} />
+    // </div>
+
+    <div className="w-[80%] mx-auto p-4">
+      <div className="flex flex-col  md:flex-row md:justify-between md:items-center mb-2">
+        <h1 className="text-2xl font-semibold mb-4 md:mb-0 text-gray-600">
+          Customer Growth Rate
+        </h1>
+
+        <div className="w-full md:w-auto">
+          <Select
+            onValueChange={(value) => setView(value as typeof view)}
+            value={view}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Interval" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="daily">Daily</SelectItem>
+                <SelectItem value="monthly">Monthly</SelectItem>
+                <SelectItem value="yearly">Yearly</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {error ? (
+        <div className="text-red-500">{error}</div>
+      ) : (
+        <Line data={data} options={options} />
+      )}
     </div>
   );
 };
