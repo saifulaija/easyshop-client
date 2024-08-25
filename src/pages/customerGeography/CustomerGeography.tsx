@@ -24,10 +24,6 @@ const CustomerMap = () => {
     isLoading,
   } = useGetGeographicalCustomersQuery({});
 
-
-  console.log(geoData);
-  
-
   if (isLoading) return <Loader />;
   if (error) return <p>Error loading data!</p>;
 
