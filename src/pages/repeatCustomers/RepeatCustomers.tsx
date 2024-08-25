@@ -13,6 +13,15 @@ import {
   ChartData,
 } from "chart.js";
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { useGetRepeatingCustomersQuery } from "@/redux/features/dashboard/dashboardApi";
 import Loader from "@/components/shared/Loader/Loader";
 
@@ -100,29 +109,39 @@ const RepeatCustomers = () => {
     maintainAspectRatio: false,
   };
 
-  const handleIntervalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setView(e.target.value as "daily" | "monthly" | "yearly");
-  };
-
   return (
-    <div className="w-[80%] mx-auto">
-      <h1 className="text-2xl font-semibold mb-4">Repeated Customers</h1>
-      <label htmlFor="interval-select" className="mr-2">
-        Select Interval:
-      </label>
-      <select
-        id="interval-select"
-        value={view}
-        onChange={handleIntervalChange}
-        className="mb-4 border border-gray-300 rounded p-2"
-      >
-        <option value="daily">Daily</option>
-        <option value="monthly">Monthly</option>
-        <option value="yearly">Yearly</option>
-      </select>
-      <div className="relative h-[500px]">
-        <Line data={data} options={options} />
+    <div className="w-[80%] mx-auto p-4">
+      <div className="flex flex-col  md:flex-row md:justify-between md:items-center mb-2">
+        <h1 className="text-2xl font-semibold mb-4 md:mb-0 text-gray-600">
+          Repeated Customer Growth
+        </h1>
+
+        <div className="w-full md:w-auto">
+          <Select
+            onValueChange={(value) => setView(value as typeof view)}
+            value={view}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Interval" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="daily">Daily</SelectItem>
+                <SelectItem value="monthly">Monthly</SelectItem>
+                <SelectItem value="yearly">Yearly</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
+
+      {error ? (
+        <div className="text-red-500">{error}</div>
+      ) : (
+        <div className="relative h-[400px]">
+          <Line data={data} options={options} />
+        </div>
+      )}
     </div>
   );
 };

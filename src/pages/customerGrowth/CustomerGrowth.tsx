@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -22,7 +22,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-
 import { useGetCustomerGrowthOverTimeQuery } from "@/redux/features/dashboard/dashboardApi";
 import Loader from "@/components/shared/Loader/Loader";
 
@@ -42,7 +41,7 @@ interface CustomerGrowthData {
   newCustomers: number;
 }
 
-const CustomerGrowth= () => {
+const CustomerGrowth = () => {
   const [view, setView] = useState<"daily" | "monthly" | "yearly">("daily");
   const {
     data: chartData,
@@ -64,7 +63,8 @@ const CustomerGrowth= () => {
           `${item._id.day}-${item._id.month}-${item._id.year}`
       ) || [];
     dataValues =
-      chartData?.data?.map((item: CustomerGrowthData) => item.newCustomers) || [];
+      chartData?.data?.map((item: CustomerGrowthData) => item.newCustomers) ||
+      [];
   } else if (view === "monthly") {
     labels =
       chartData?.data?.map(
@@ -113,27 +113,7 @@ const CustomerGrowth= () => {
     },
   };
 
-  const handleIntervalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setView(e.target.value as "daily" | "monthly" | "yearly");
-  };
-
   return (
-    // <div className="w-[80%] mx-auto">
-    //   <h1>Customer Growth Over Time</h1>
-    //   <label htmlFor="interval-select">Select Interval: </label>
-    //   <select
-    //     id="interval-select"
-    //     value={view}
-    //     onChange={handleIntervalChange}
-    //     className="mb-4 border border-gray-300 rounded p-2"
-    //   >
-    //     <option value="daily">Daily</option>
-    //     <option value="monthly">Monthly</option>
-    //     <option value="yearly">Yearly</option>
-    //   </select>
-    //   <Line data={data} options={options} />
-    // </div>
-
     <div className="w-[80%] mx-auto p-4">
       <div className="flex flex-col  md:flex-row md:justify-between md:items-center mb-2">
         <h1 className="text-2xl font-semibold mb-4 md:mb-0 text-gray-600">
