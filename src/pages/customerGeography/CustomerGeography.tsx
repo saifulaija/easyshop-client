@@ -16,7 +16,6 @@ interface GeoData {
   _id: string;
   customerCount: number;
 }
-
 const CustomerMap = () => {
   const {
     data: geoData,
@@ -72,3 +71,8 @@ const CustomerMap = () => {
 };
 
 export default CustomerMap;
+
+
+
+
+

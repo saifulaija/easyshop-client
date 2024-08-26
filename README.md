@@ -1,30 +1,44 @@
-# React + TypeScript + Vite
+# Server GitHub Link
+You can access the server side GitHub Link at [Easy Shop Server](https://github.com/saifulaija/easyshop-server).
+# EasyShop Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend code for the **EasyShop** project. The frontend application is designed to visualize various business metrics using data fetched from the `RQ_Analytics` backend. This includes charts for total sales, sales growth, new customers, repeat customers, geographical distribution, and customer lifetime value.
 
-Currently, two official plugins are available:
+## Live Link
+The live version of the EasyShop frontend can be accessed at [EasyShop](https://easyshop-nine.vercel.app/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Integration](#api-integration)
+- [Components Overview](#components-overview)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Total Sales Over Time**: Displays total sales data aggregated by daily, monthly, quarterly, and yearly intervals using data from `shopifyOrders`.
+- **Sales Growth Rate Over Time**: Visualizes the growth rate of sales over different time periods.
+- **New Customers Added Over Time**: Tracks and visualizes the addition of new customers based on their creation date in `shopifyCustomers`.
+- **Number of Repeat Customers**: Identifies and displays the number of customers with more than one purchase, segmented by daily, monthly, quarterly, and yearly time frames.
+- **Geographical Distribution of Customers**: Maps customer locations based on their city, as recorded in `shopifyCustomers`.
+- **Customer Lifetime Value by Cohorts**: Groups customers by the month of their first purchase and visualizes the lifetime value of each cohort.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **React.js**: For building the user interface.
+- **Tailwind CSS**: For styling the application with a utility-first CSS framework.
+- **ShadCN UI**: For using pre-designed UI components.
+- **Chart.js**: For creating interactive and responsive charts.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Installation
+
+To get started with the EasyShop frontend locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/saifulaija/easyshop-client
+   cd easyshop-frontend

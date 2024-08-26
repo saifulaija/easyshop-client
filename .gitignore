@@ -24,3 +24,5 @@ vercel
 *.njsproj
 *.sln
 *.sw?
+
+.vercel

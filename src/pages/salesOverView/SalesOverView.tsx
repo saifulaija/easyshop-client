@@ -50,7 +50,7 @@ const SalesOverView: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/order/sales-measurement",
+          "https://easy-shop-server-ochre.vercel.app/api/order/sales-measurement",
           {
             params: { interval: view },
           }
