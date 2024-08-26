@@ -1,5 +1,5 @@
 # Server GitHub Link
-You can access the server side GitHub Link at [Easy Shop Server](https://github.com/saifulaija/easyshop-server).
+You can access the server side GitHub Link at [Easy Shop Server GitHub](https://github.com/saifulaija/easyshop-server).
 # EasyShop Frontend
 
 This repository contains the frontend code for the **EasyShop** project. The frontend application is designed to visualize various business metrics using data fetched from the `RQ_Analytics` backend. This includes charts for total sales, sales growth, new customers, repeat customers, geographical distribution, and customer lifetime value.
